@@ -1,1 +1,1 @@
-# HTSS_paper
+This repository contains all code, models, and corpora for the NLP community for future academic research. to train the model with default parameters use the command "python train.py" to evaluate the model performance use command "python eval.py" you can change hyperparameters both at command level or alternatively you can edit the confg.py and argument parsers default in train and evaluation files.
