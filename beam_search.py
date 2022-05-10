@@ -1,5 +1,4 @@
 import torch as T
-
 from data_util import config as config
 # from data_util import config as config
 from train_util import get_cuda
@@ -45,7 +44,7 @@ class Beam(object):
         # will be sorted in descending order of scores
         best_scores, best_scores_id = T.topk(input=scores, k=config.beam_size, dim=0)
         self.scores = best_scores  # (beam,1); sorted
-        beams_order = best_scores_id.squeeze(1) / n_extended_vocab  # (beam,); sorted
+        beams_order = best_scores_id.squeeze(1) // n_extended_vocab  # (beam,); sorted
         best_words = best_scores_id % n_extended_vocab  # (beam,1); sorted
         self.hid_h = h[beams_order]  # (beam, n_hid); sorted
         self.hid_c = c[beams_order]  # (beam, n_hid); sorted
