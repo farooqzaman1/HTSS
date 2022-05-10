@@ -2,21 +2,22 @@
 import argparse
 import time
 import matplotlib.pyplot as plt
-import torch as T
 import torch.nn.functional as F
 import torch.nn as nn
 from numpy import random
-from rouge import Rouge
-# from torch.distributions import Categorical
 from pp import Vocab
 from model import Encoder_Decoder_Model
-from data_util import config
 from train_util import *
 import pandas as pd
 import pp
 import os
 from GPUtil import showUtilization as gpu_usage
 from beam_search import beam_search
+from pathlib import Path
+#import torch as T
+#from rouge import Rouge
+#from torch.distributions import Categorical
+#from data_util import config
 
 # os.environ['CUDA_LAUNCH_BLOCKING'] = "1"  # setting trace back for more clear error
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # Set cuda device
@@ -63,6 +64,7 @@ class Model(nn.Module):
         ####################################################
 
     def save_model(self, iter):
+        Path(config.save_model_path).mkdir(parents=True, exist_ok=True)
         save_path = config.save_model_path + "/%03d.tar" % iter
         T.save({ "iter": iter + 1,  "model_dict": self.model_enc_dec.state_dict(),
                  "optimizer_dict": self.optimizer.state_dict() }, save_path)
