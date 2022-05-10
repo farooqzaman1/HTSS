@@ -5,3 +5,4 @@ matplotlib~=3.5.1
 numpy~=1.21.2
 gputil~=1.4.0
 easse~=0.2.4
+rouge~=1.0.1
